@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: ticket_system_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ticket_admin
+      POSTGRES_PASSWORD: ticket_pass
+      POSTGRES_DB: ticket_system
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -1,0 +1,45 @@
+# Copy this file to backup.conf (or any name) and fill in real values.
+# Never commit the filled-in version to git — add it to .gitignore.
+
+# --- MySQL connection ---
+DB_HOST="127.0.0.1"
+DB_PORT="3306"
+DB_USER="backup_user"
+DB_PASSWORD="changeme"
+DB_NAME="customer_support"
+
+# --- S3 destination ---
+# Trailing slash optional, script normalizes it.
+S3_PATH="s3://my-company-backups/customer-support-ticket-system/"
+
+# Optional: named AWS CLI profile (leave empty to use default credentials/IAM role)
+AWS_PROFILE=""
+
+# --- Local behavior ---
+# Local scratch dir for the dump before/after upload
+BACKUP_DIR="/tmp/mysql-backups"
+
+# gzip the dump before upload (recommended)
+COMPRESS="true"
+
+# Delete the local file after a successful upload
+DELETE_LOCAL_AFTER_UPLOAD="true"
+
+# If keeping local copies, delete ones older than N days (0 = disabled)
+LOCAL_RETENTION_DAYS="7"
+
+# --- Cron wrapper settings (used by cron-wrapper.sh, not the backup script itself) ---
+# Cron runs with a minimal PATH (often just /usr/bin:/bin) — it will NOT see
+# Homebrew or manually-installed tools even though they work fine in your
+# interactive shell. cron-wrapper.sh already adds common Homebrew locations;
+# set this only if mysqldump/aws/flock live somewhere unusual on this host
+# (e.g. a manual MySQL install), colon-separated like a normal PATH.
+# EXTRA_PATH="/usr/local/mysql/bin"
+
+# Directory/file for the run log. Defaults to "$BACKUP_DIR/logs/<this-conf-name>.log".
+# LOG_DIR="/var/log/mysql-backup"
+# LOG_FILE="/var/log/mysql-backup/my-project.log"
+
+# Optional: Slack incoming webhook URL. If set, cron-wrapper.sh posts an
+# alert to it when a backup run fails. Leave empty/unset to disable.
+SLACK_WEBHOOK_URL=""

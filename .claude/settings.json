@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker exec *)",
+      "Bash(find / -maxdepth 6 -iname \"*chromium-cli*\" 2>/dev/null | head -20; echo \"---\"; ls /private/tmp/claude-501/bundled-skills/2.1.273/ 2>/dev/null | grep -i chrom)",
+      "Read(//private/tmp/claude-501/bundled-skills/2.1.273/**)"
+    ]
+  }
+}
